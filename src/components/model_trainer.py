@@ -42,6 +42,7 @@ class ModelTrainer:
                 "CatBoosting Regressor": CatBoostRegressor(verbose=False),
                 "AdaBoost Regressor": AdaBoostRegressor(),
             }
+
             logging.info("Getting All The models")
             model_report:dict = evaluate_model(X_train=X_train, y_train=y_train,
                                                X_test=X_test, y_test=y_test,
@@ -63,7 +64,7 @@ class ModelTrainer:
 
             if best_model_score < 0.6:
                 raise CustomException("No best model found")
-            logging.info("Best model found on both training and testing dataset.")
+            logging.info(f"Best model found on both training and testing dataset: {best_model_name}")
             best_model = models[best_model_name]
             save_object(
                 file_path=self.model_trainer_config.trained_model_file_path,
